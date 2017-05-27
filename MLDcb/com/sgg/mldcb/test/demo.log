@@ -1,0 +1,8 @@
+demo        : INFO     Start reading database
+demo        : DEBUG    Records: {'john': 55, 'tom': 66}
+demo        : INFO     Updating records ...
+demo        : INFO     Finish updating records
+2017/03/31 22:37:38 TestLogging.py[line:8] INFO Start reading database
+2017/03/31 22:37:38 TestLogging.py[line:12] DEBUG Records: {'john': 55, 'tom': 66}
+2017/03/31 22:37:38 TestLogging.py[line:13] INFO Updating records ...
+2017/03/31 22:37:38 TestLogging.py[line:16] INFO Finish updating records

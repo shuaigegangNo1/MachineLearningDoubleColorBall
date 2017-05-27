@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style type="text/css">
+        .ball_default{
+            width:50px;
+            height:50px;
+            background-color: #e9e5e7;
+            border-radius:25px;
+            float:left;
+            margin: 0px -9px 0px 19px;
+        }
+        .ball_red{
+            width:50px;
+            height:50px;
+            background-color: #ff4262;
+            border-radius:25px;
+            float:left;
+            margin: 0px -9px 0px 19px;
+        }
+        .ball_redest{
+            width:50px;
+            height:50px;
+            background-color: #ff070e;
+            border-radius:25px;
+            float:left;
+            margin: 0px -9px 0px 19px;
+        }
+        .ball_blue{
+            width:50px;
+            height:50px;
+            background-color: #97ffa1;
+            border-radius:25px;
+            float:left;
+            margin: 0px -9px 0px 19px;
+        }
+        .ball_bluest{
+            width:50px;
+            height:50px;
+            background-color: #28ff0f;
+            border-radius:25px;
+            float:left;
+            margin: 0px -9px 0px 19px;
+        }
+        .ball_number{
+            height:50px;
+            line-height:50px;
+            display:block;
+            color: #020001;
+            text-align:center;
+        }
+        .ball_extend_data{
+            font-weight: normal;
+            color: #999;
+            height: 18px;
+            line-height: 20px;
+            text-align: center;
+            margin-top: -5px;
+            width: 39px;
+            padding-top: 2px;
+        }
+        .div_center{
+            text-align: center;
+            margin:0 auto ;
+            width:1050px;
+            height:36px
+        }
+    </style>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <script type="application/javascript">
+        function changeClass(i) {
+            var div = document.getElementById('ball'+i);
+            if (div!=null){
+               div.setAttribute("class", "ball_red");
+            }
+
+        }
+        function changeClass1(i) {
+            var div = document.getElementById('ball'+i);
+            if(div!=null){
+                div.setAttribute("class", "ball_default");
+            }
+
+        }
+        function changeClass2() {
+            var div = document.getElementById('ball');
+            div.setAttribute("class", "ball_blue");
+        }
+        function changeBlueClass(Id) {
+            var div = document.getElementById(Id);
+            div.setAttribute("class", "ball_blue");
+        }
+        function changeBlueClass1(Id) {
+            var div = document.getElementById(Id);
+
+            div.setAttribute("class", "ball_default");
+        }
+        function chooseRedBall(Id,numId) {
+            var divChange = document.getElementById('ball'+Id+'Change');
+            var input_num=1;
+            for(var i=1;i<7 && document.getElementById('r'+i).value!="";i++){
+                console.log(i)
+                input_num=i+1;
+                console.log("input_num=",input_num)
+            }
+            var input= document.getElementById('r'+input_num);
+            var input1=document.getElementById('r'+(input_num-1))
+            if(divChange==null){
+                var div = document.getElementById('ball'+Id);
+                div.setAttribute("class", "ball_redest");
+                div.setAttribute("id","ball"+Id+"Change");
+{#                console.log(div.getAttributeNode("id"));#}
+
+                input.value=document.getElementById(numId).innerText;
+            }
+            else{
+                divChange.setAttribute("id","ball"+Id);
+                divChange.setAttribute("class","ball_default");
+                input1.value=null
+
+            }
+
+        }
+        function chooseBlueBall(Id,numId){
+            var divChange = document.getElementById('ball'+Id+'bChange');
+            var input= document.getElementById('b7');
+            if(divChange==null){
+                for(var i=1;i<17;i++){
+                    var divC=document.getElementById('ball'+i+'bChange')
+                    if(divC!=null){
+                        divC.setAttribute("class","ball_default");
+                    }
+                }
+                var div = document.getElementById('ball'+Id+'b');
+                div.setAttribute("class", "ball_bluest");
+                div.setAttribute("id","ball"+Id+"bChange");
+                input.value=document.getElementById(numId).innerText;
+            }
+            else{
+
+                divChange.setAttribute("id","ball"+Id+'b');
+                divChange.setAttribute("class","ball_default");
+                input.value=null
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h1 style="text-align: center"> DOUBLE COLOR BALL</h1>
+<h2 style="text-align: center" > <p style="color: red; display:inline ">RED BALLS AREA</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <p style="color: blue; display: inline ;"> BLUE BALLS AREA</p></h2>
+
+<div class="div_center">
+<div id="ball1" class="ball_default" onmouseleave="changeClass1(1)" onmouseenter="changeClass(1)" onclick="chooseRedBall('1','rn1')";>
+         <span id="rn1" class="ball_number" >01</span>
+</div>
+<div id="ball2" class="ball_default" onmouseleave="changeClass1(2)" onmouseenter="changeClass(2)" onclick="chooseRedBall('2','rn2')"；>
+         <span id="rn2" class="ball_number">02</span>
+</div>
+<div id="ball3" class="ball_default" onmouseleave="changeClass1(3)" onmouseenter="changeClass(3)" onclick="chooseRedBall('3','rn3')"；>
+         <span id="rn3" class="ball_number">03</span>
+</div>
+<div id="ball4" class="ball_default" onmouseleave="changeClass1(4)" onmouseenter="changeClass(4)" onclick="chooseRedBall('4','rn4')"；>
+         <span id="rn4" class="ball_number">04</span>
+</div>
+<div id="ball5" class="ball_default" onmouseleave="changeClass1(5)" onmouseenter="changeClass(5)" onclick="chooseRedBall('5','rn5')"；>
+         <span id="rn5" class="ball_number">05</span>
+</div>
+<div id="ball6" class="ball_default" onmouseleave="changeClass1(6)" onmouseenter="changeClass(6)" onclick="chooseRedBall('6','rn6')"；>
+         <span id="rn6" class="ball_number">06</span>
+</div>
+<div id="ball7" class="ball_default" onmouseleave="changeClass1(7)" onmouseenter="changeClass(7)" onclick="chooseRedBall('7','rn7')"；>
+         <span id="rn7" class="ball_number">07</span>
+</div>
+<div id="ball8" class="ball_default" onmouseleave="changeClass1(8)" onmouseenter="changeClass(8)" onclick="chooseRedBall('8','rn8')"；>
+         <span id="rn8" class="ball_number">08</span>
+</div>
+<div id="ball9" class="ball_default" onmouseleave="changeClass1(9)" onmouseenter="changeClass(9)" onclick="chooseRedBall('9','rn9')"；>
+         <span id="rn9" class="ball_number">09</span>
+</div>
+<div id="ball10" class="ball_default" onmouseleave="changeClass1(10)" onmouseenter="changeClass(10)" onclick="chooseRedBall('10','rn10')"；>
+         <span id="rn10" class="ball_number">10</span>
+</div>
+<div id="ball11" class="ball_default" onmouseleave="changeClass1(11)" onmouseenter="changeClass(11)" onclick="chooseRedBall('11','rn11')"；>
+         <span id="rn11" class="ball_number">11</span>
+</div>
+
+
+
+<div id="ball1b" class="ball_default" onmouseleave="changeBlueClass1('ball1b')" onmouseenter="changeBlueClass('ball1b')" onclick="chooseBlueBall('1','bn1')"；>
+         <span id="bn1" class="ball_number">01</span>
+</div>
+<div id="ball2b" class="ball_default" onmouseleave="changeBlueClass1('ball2b')" onmouseenter="changeBlueClass('ball2b')" onclick="chooseBlueBall('2','bn2')"；>
+         <span id="bn2" class="ball_number">02</span>
+</div>
+<div id="ball3b" class="ball_default" onmouseleave="changeBlueClass1('ball3b')" onmouseenter="changeBlueClass('ball3b')" onclick="chooseBlueBall('3','bn3')"；>
+         <span id="bn3" class="ball_number">03</span>
+</div>
+<div id="ball4b" class="ball_default" onmouseleave="changeBlueClass1('ball4b')" onmouseenter="changeBlueClass('ball4b')" onclick="chooseBlueBall('4','bn4')"；>
+         <span id="bn4" class="ball_number">04</span>
+</div>
+<div id="ball5b" class="ball_default" onmouseleave="changeBlueClass1('ball5b')" onmouseenter="changeBlueClass('ball5b')" onclick="chooseBlueBall('5','bn5')"；>
+         <span id="bn5" class="ball_number">05</span>
+</div>
+<div id="ball6b" class="ball_default" onmouseleave="changeBlueClass1('ball6b')" onmouseenter="changeBlueClass('ball6b')" onclick="chooseBlueBall('6','bn6')"；>
+         <span id="bn6" class="ball_number">06</span>
+</div>
+</div>
+<br>
+<br>
+<div class="div_center">
+<div id="ball12" class="ball_default" onmouseleave="changeClass1(12)" onmouseenter="changeClass(12)" onclick="chooseRedBall('12','rn12')"；>
+         <span id="rn12" class="ball_number">12</span>
+</div>
+<div id="ball13" class="ball_default" onmouseleave="changeClass1(13)" onmouseenter="changeClass(13)" onclick="chooseRedBall('13','rn13')"；>
+         <span id="rn13" class="ball_number">13</span>
+</div>
+<div id="ball14" class="ball_default" onmouseleave="changeClass1(14)" onmouseenter="changeClass(14)" onclick="chooseRedBall('14','rn14')"；>
+         <span id="rn14" class="ball_number">14</span>
+</div>
+<div id="ball15" class="ball_default" onmouseleave="changeClass1(15)" onmouseenter="changeClass(15)" onclick="chooseRedBall('15','rn15')"；>
+         <span id="rn15" class="ball_number">15</span>
+</div>
+<div id="ball16" class="ball_default" onmouseleave="changeClass1(16)" onmouseenter="changeClass(16)" onclick="chooseRedBall('16','rn16')"；>
+         <span id="rn16" class="ball_number">16</span>
+</div>
+<div id="ball17" class="ball_default" onmouseleave="changeClass1(17)" onmouseenter="changeClass(17)" onclick="chooseRedBall('17','rn17')"；>
+         <span id="rn17" class="ball_number">17</span>
+</div>
+<div id="ball18" class="ball_default" onmouseleave="changeClass1(18)" onmouseenter="changeClass(18)" onclick="chooseRedBall('18','rn18')"；>
+         <span id="rn18" class="ball_number">18</span>
+</div>
+<div id="ball19" class="ball_default" onmouseleave="changeClass1(19)" onmouseenter="changeClass(19)" onclick="chooseRedBall('19','rn19')"；>
+         <span id="rn19" class="ball_number">19</span>
+</div>
+<div id="ball20" class="ball_default" onmouseleave="changeClass1(20)" onmouseenter="changeClass(20)" onclick="chooseRedBall('20','rn20')"；>
+         <span id="rn20" class="ball_number">20</span>
+</div>
+<div id="ball21" class="ball_default" onmouseleave="changeClass1(21)" onmouseenter="changeClass(21)" onclick="chooseRedBall('21','rn21')"；>
+         <span id="rn21" class="ball_number">21</span>
+</div>
+<div id="ball22" class="ball_default" onmouseleave="changeClass1(22)" onmouseenter="changeClass(22)" onclick="chooseRedBall('22','rn22')"；>
+         <span id="rn22" class="ball_number">22</span>
+</div>
+
+
+<div id="ball7b" class="ball_default" onmouseleave="changeBlueClass1('ball7b')" onmouseenter="changeBlueClass('ball7b')" onclick="chooseBlueBall('7','bn7')"；>
+         <span id="bn7" class="ball_number">07</span>
+</div>
+<div id="ball8b" class="ball_default" onmouseleave="changeBlueClass1('ball8b')" onmouseenter="changeBlueClass('ball8b')" onclick="chooseBlueBall('8','bn8')"；>
+         <span id="bn8" class="ball_number">08</span>
+</div>
+<div id="ball9b" class="ball_default" onmouseleave="changeBlueClass1('ball9b')" onmouseenter="changeBlueClass('ball9b')" onclick="chooseBlueBall('9','bn9')"；>
+         <span id="bn9" class="ball_number">09</span>
+</div>
+<div id="ball10b" class="ball_default" onmouseleave="changeBlueClass1('ball10b')" onmouseenter="changeBlueClass('ball10b')" onclick="chooseBlueBall('10','bn10')"；>
+         <span id="bn10" class="ball_number">10</span>
+</div>
+<div id="ball11b" class="ball_default" onmouseleave="changeBlueClass1('ball11b')" onmouseenter="changeBlueClass('ball11b')" onclick="chooseBlueBall('11','bn11')"；>
+         <span id="bn11" class="ball_number">11</span>
+</div>
+<div id="ball12b" class="ball_default" onmouseleave="changeBlueClass1('ball12b')" onmouseenter="changeBlueClass('ball12b')" onclick="chooseBlueBall('12','bn12')"；>
+         <span id="bn12" class="ball_number">12</span>
+</div>
+</div>
+<br>
+<br>
+<div class="div_center">
+
+<div id="ball23" class="ball_default" onmouseleave="changeClass1(23)" onmouseenter="changeClass(23)" onclick="chooseRedBall('23','rn23')"；>
+         <span id="rn23" class="ball_number">23</span>
+</div>
+<div id="ball24" class="ball_default" onmouseleave="changeClass1(24)" onmouseenter="changeClass(24)" onclick="chooseRedBall('24','rn24')"；>
+         <span  id="rn24" class="ball_number">24</span>
+</div>
+<div id="ball25" class="ball_default" onmouseleave="changeClass1(25)" onmouseenter="changeClass(25)" onclick="chooseRedBall('25','rn25')"；>
+         <span  id="rn25" class="ball_number">25</span>
+</div>
+<div id="ball26" class="ball_default" onmouseleave="changeClass1(26)" onmouseenter="changeClass(26)" onclick="chooseRedBall('26','rn26')"；>
+         <span id="rn26" class="ball_number">26</span>
+</div>
+<div id="ball27" class="ball_default" onmouseleave="changeClass1(27)" onmouseenter="changeClass(27)" onclick="chooseRedBall('27','rn27')"；>
+         <span id="rn27" class="ball_number">27</span>
+</div>
+<div id="ball28" class="ball_default" onmouseleave="changeClass1(28)" onmouseenter="changeClass(28)" onclick="chooseRedBall('28','rn28')"；>
+         <span id="rn28" class="ball_number">28</span>
+</div>
+<div id="ball29" class="ball_default" onmouseleave="changeClass1(29)" onmouseenter="changeClass(29)" onclick="chooseRedBall('29','rn29')"；>
+         <span id="rn29" class="ball_number">29</span>
+</div>
+<div id="ball30" class="ball_default" onmouseleave="changeClass1(30)" onmouseenter="changeClass(30)" onclick="chooseRedBall('30','rn30')"；>
+         <span id="rn30" class="ball_number">30</span>
+</div>
+<div id="ball31" class="ball_default" onmouseleave="changeClass1(31)" onmouseenter="changeClass(31)" onclick="chooseRedBall('31','rn31')"；>
+         <span id="rn31" class="ball_number">31</span>
+</div>
+<div id="ball32" class="ball_default" onmouseleave="changeClass1(32)" onmouseenter="changeClass(32)" onclick="chooseRedBall('32','rn32')"；>
+         <span id="rn32" class="ball_number">32</span>
+</div>
+<div id="ball33" class="ball_default" onmouseleave="changeClass1(33)" onmouseenter="changeClass(33)" onclick="chooseRedBall('33','rn33')"；>
+         <span id="rn33" class="ball_number">33</span>
+</div>
+
+<div id="ball13b" class="ball_default" onmouseleave="changeBlueClass1('ball13b')" onmouseenter="changeBlueClass('ball13b')" onclick="chooseBlueBall('13','bn13')"；>
+         <span id="bn13" class="ball_number">13</span>
+</div>
+<div id="ball14b" class="ball_default" onmouseleave="changeBlueClass1('ball14b')" onmouseenter="changeBlueClass('ball14b')" onclick="chooseBlueBall('14','bn14')"；>
+         <span id="bn14" class="ball_number">14</span>
+</div>
+<div id="ball15b" class="ball_default" onmouseleave="changeBlueClass1('ball15b')" onmouseenter="changeBlueClass('ball15b')" onclick="chooseBlueBall('15','bn15')"；>
+         <span id="bn15" class="ball_number">15</span>
+</div>
+<div id="ball16b" class="ball_default" onmouseleave="changeBlueClass1('ball16b')" onmouseenter="changeBlueClass('ball16b')" onclick="chooseBlueBall('16','bn16')"；>
+         <span id="bn16" class="ball_number">16</span>
+</div>
+</div>
+<br>
+<br>
+<br>
+<form action = "{{ url_for('add_double_color_ball') }}" method = "POST">
+<div class="form-group">
+
+    <div class="col-sm-10">
+        <label class="col-sm-2 control-label">R01:</label>
+    <input style="width:10%" class="form-control" type="text" id="r1" name="r1" value="">
+    </div>
+
+    <div class="col-sm-10">
+         <label class="col-sm-2 control-label">R02:</label>
+    <input  style="width:10%" class="form-control" type="text" id="r2" name="r2" value="">
+    </div>
+
+    <div class="col-sm-10">
+        <label class="col-sm-2 control-label">R03:</label>
+    <input style="width:10%" class="form-control" type="text" id="r3" name="r3" value="">
+    </div>
+    <div class="col-sm-10">
+    <label class="col-sm-2 control-label">R04:</label>
+    <input style="width:10%" class="form-control" type="text" id="r4" name="r4" value="">
+    </div>
+     <div class="col-sm-10">
+    <label class="col-sm-2 control-label">R05:</label>
+    <input style="width:10%" class="form-control" type="text" id="r5" name="r5" value="">
+     </div>
+    <div class="col-sm-10">
+    <label class="col-sm-2 control-label">R06:</label>
+    <input style="width:10%" class="form-control" type="text" id="r6" name="r6" value="">
+    </div>
+     <div class="col-sm-10">
+    <label class="col-sm-2 control-label">B01:</label>
+     <input style="width:10%" class="form-control" type="text" id="b7" name="b7" value="">
+     </div>
+    <div class="col-sm-10">
+    <label class="col-sm-2 control-label">ID:</label>
+     <input style="width:10%" class="form-control" type="text" id="id" name="id" value="">
+     </div>
+    <div>
+
+</div>
+    <div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-default">提交</button>
+		</div>
+	</div>
+</div>
+</form>
+
+
+
+</body>
+</html>

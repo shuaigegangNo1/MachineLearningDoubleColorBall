@@ -1,0 +1,8 @@
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+print("Opened database successfully");
+conn.execute('DROP TABLE IF EXISTS dcb')
+conn.execute('CREATE TABLE dcb (r1 TEXT, r2 TEXT, r3 TEXT, r4 TEXT, r5 TEXT, r6 TEXT,b7 TEXT)')
+print("Table created successfully");
+conn.close()

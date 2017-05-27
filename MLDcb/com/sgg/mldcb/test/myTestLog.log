@@ -1,0 +1,4 @@
+2017/04/04 19:07:23 TestLogging.py[line:8] INFO Start reading database
+2017/04/04 19:07:23 TestLogging.py[line:12] DEBUG Records: {'john': 55, 'tom': 66}
+2017/04/04 19:07:23 TestLogging.py[line:13] INFO Updating records ...
+2017/04/04 19:07:23 TestLogging.py[line:16] INFO Finish updating records

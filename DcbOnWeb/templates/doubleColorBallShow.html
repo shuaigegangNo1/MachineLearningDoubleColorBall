@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="static/js/echarts.min.js"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='jquery-3.2.1.js') }}"></script>
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+</head>
+<body>
+<h1 style="text-align: center; color: #2aabd2;">Double Color Ball Display</h1>
+
+<script type="text/javascript">
+    function showCharts(data1, data2, data3, data4, data5, data6, data7, dateData) {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '双色球K线图'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+{#            legend: {
+                data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+            },#}
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: dateData
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: 'red-ball-1',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data1
+                },
+                {
+                    name: 'red-ball-2',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data2
+                },
+                {
+                    name: 'red-ball-3',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data3
+                },
+                {
+                    name: 'red-ball-4',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data4
+                },
+                {
+                    name: 'red-ball-5',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data5
+                },
+                {
+                    name: 'red-ball-6',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data6
+                },
+                {
+                    name: 'blue-ball-1',
+                    type: 'line',
+                    stack: '球号',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: data7
+                }
+            ]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function get_Data() {
+        var data = new Object();
+        data.red1 = []
+        data.red2 = []
+        data.red3 = []
+        data.red4 = []
+        data.red5 = []
+        data.red6 = []
+        data.b1 = []
+        data.location = [];
+        data.num = Number($("#num").val());
+        var data = JSON.stringify(data)
+        $.ajax({
+            url: "/postDcbData",
+            type: "POST",
+            //async : false, //同步请求
+            data: data,
+            timeout: 1000,
+            success: function (msg) {
+                $("#num").val(msg.num);
+                showCharts(msg.red1, msg.red2, msg.red3, msg.red4, msg.red5, msg.red6, msg.b1, msg.location)
+            },
+            error: function () {
+                alert("失败，请稍后再试！");
+            }
+
+        })
+    }
+    var t;
+    function startInterval() {
+        t = setInterval("get_Data()", 3000)
+    }
+
+    function clearTime() {
+        clearInterval(t);
+    }
+</script>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom   -->
+<div id="main" style="width: 700px;height:500px; position:absolute; left:311px;top:65px;"  >
+
+</div>
+<div id="mainContent" style="position:absolute; left:311px;top:600px;">
+   刷新频次： <input type="text" id="num" value="0"/>
+    <input type="button" id="closeInterval" name="closeInterval" value="START" onclick="startInterval()"/>
+    <input type="button" id="closeInterval" name="closeInterval" value="STOP" onclick="clearTime()"/>
+</div>
+</body>
+
+</html>
