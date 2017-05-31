@@ -1,4 +1,5 @@
 import pymysql
+from MLDcb.com.sgg.mldcb.util.FormatUtil import FormatUtil
 
 
 class MysqlUtil(object):
@@ -18,25 +19,35 @@ class MysqlUtil(object):
         except:
             print("connect mysql failed.")
 
-    def mysql_query(self):
+    # def mysql_query(self):
+    #     try:
+    #         sql = "select * from " + self.table + " limit 10"
+    #         self.cursor.execute(sql)
+    #         rows = self.cursor.fetchall()
+    #         # print(rows)
+    #     except:
+    #         print(sql + "query failed")
+    #     return rows
+
+    def mysql_query(self, start, length):
         try:
-            sql = "select * from " + self.table + " limit 10"
+            sql = "select * from " + self.table + " limit " + str(start) + "," + str(length)
+            print(sql)
             self.cursor.execute(sql)
             rows = self.cursor.fetchall()
-            # print(rows)
         except:
             print(sql + "query failed")
         return rows
 
-    def mysql_query(self, sql):
-        try:
-            # sql = "select * from " + self.table + " limit 10"
-            self.cursor.execute(sql)
-            rows = self.cursor.fetchall()
-            # print(rows)
-        except:
-            print(sql + "query failed")
-        return rows
+    # def mysql_query(self, sql):
+    #     try:
+    #         # sql = "select * from " + self.table + " limit 10"
+    #         self.cursor.execute(sql)
+    #         rows = self.cursor.fetchall()
+    #         # print(rows)
+    #     except:
+    #         print(sql + "query failed")
+    #     return rows
 
     def mysql_query_one(self):
         try:
@@ -48,10 +59,26 @@ class MysqlUtil(object):
             print(sql + "query failed")
         return rows
 
-    def mysql_insert(self, arg0, arg1, arg2):
+    # def mysql_insert(self, arg0, arg1, arg2):
+    #     try:
+    #         # sql = "insert into " + self.table + "  values(" +arg0+","+arg1+","+arg2+")"
+    #         sql = "INSERT INTO " + self.table + " VALUES(" + arg0 + "," + arg1 + "," + "'" + arg2 + "'" + ")"
+    #
+    #         self.cursor.execute(sql)
+    #         self.conn.commit()
+    #         print(sql + "insert succeed")
+    #     except:
+    #         self.conn.commit()
+    #         print(sql + "insert failed")
+
+    def mysql_insert(self, args):
         try:
-            # sql = "insert into " + self.table + "  values(" +arg0+","+arg1+","+arg2+")"
-            sql = "INSERT INTO " + self.table + " VALUES(" + arg0 + "," + arg1 + "," + "'" + arg2 + "'" + ")"
+            fu = FormatUtil()
+            args = [fu.convert_int_to_str(arg) for arg in args]
+            sql = "INSERT INTO " + self.table + " VALUES(" + args[0] + "," + args[1] + "," + args[2] + "," \
+                  + args[3] + "," + args[4] + "," + args[5] + "," + args[6] + "," + args[7] + "," + args[8] + "," \
+                  + args[9] + "," + args[10] + "," + args[11] + ")"
+            print("sql", sql)
 
             self.cursor.execute(sql)
             self.conn.commit()

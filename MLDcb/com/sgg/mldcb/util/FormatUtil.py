@@ -13,6 +13,9 @@ class FormatUtil(object):
         print(x)
         return x
 
+    def convert_int_to_str(self, num):
+        return "'" + str(num) + "'"
+
 
 if __name__ == "__main__":
     print(const.company)

@@ -48,8 +48,6 @@ class ThirdNeutralNetworks(object):
             syn0 += l0.T.dot(l1_delta)
         print("Output After Training:")
         print(l1)
-        # print("111")
-        # print(l1.dot(X))
         print(l2)
         return syn0, syn1
 

@@ -30,9 +30,6 @@
                     }
                 }
             },
-{#            legend: {
-                data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-            },#}
             toolbox: {
                 feature: {
                     saveAsImage: {}
@@ -150,21 +147,20 @@
     }
 
     function get_Data() {
-        var data = new Object();
-        data.red1 = []
-        data.red2 = []
-        data.red3 = []
-        data.red4 = []
-        data.red5 = []
-        data.red6 = []
-        data.b1 = []
-        data.location = [];
-        data.num = Number($("#num").val());
-        var data = JSON.stringify(data)
+        var ball = new Object();
+        ball.red1 = [];
+        ball.red2 = [];
+        ball.red3 = [];
+        ball.red4 = [];
+        ball.red5 = [];
+        ball.red6 = [];
+        ball.b1 = [];
+        ball.location = [];
+        ball.num = Number($("#num").val());
+        var data = JSON.stringify(ball);
         $.ajax({
             url: "/postDcbData",
             type: "POST",
-            //async : false, //同步请求
             data: data,
             timeout: 1000,
             success: function (msg) {
@@ -179,11 +175,37 @@
     }
     var t;
     function startInterval() {
-        t = setInterval("get_Data()", 3000)
+        t = setInterval("get_Data()", 3000);
     }
 
     function clearTime() {
         clearInterval(t);
+    }
+    function predictLottery(){
+        var lottery=new Object();
+        lottery.num = Number($("#num").val());
+        lottery.group=Number($("#group").val());
+        var data = JSON.stringify(lottery);
+        $.ajax({
+            url: "/predictLottery",
+            type: "POST",
+            data: data,
+            timeout: 5000,
+            success: function (msg) {
+                var result=msg.result;
+                if (result == true){
+                    $("#result").val('恭喜你中奖啦！！！');
+                }else{
+                    $("#result").val('祝你下次好运！！！');
+                }
+
+{#                $("#result").val(msg.result);#}
+            },
+            error: function () {
+                alert("失败，请稍后再试！888");
+            }
+
+        })
     }
 </script>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom   -->
@@ -191,9 +213,13 @@
 
 </div>
 <div id="mainContent" style="position:absolute; left:311px;top:600px;">
-   刷新频次： <input type="text" id="num" value="0"/>
+    刷新频次： <input type="text" id="num" value="0"/>
     <input type="button" id="closeInterval" name="closeInterval" value="START" onclick="startInterval()"/>
     <input type="button" id="closeInterval" name="closeInterval" value="STOP" onclick="clearTime()"/>
+    预测中奖组号：<input type="text" id="group" value="0"/>
+    <input type="button" id="predict" name="predict" value="PREDICT" onclick="predictLottery()"/>
+    预测结果：<input type="text" id="result" value=""/>
+
 </div>
 </body>
 
